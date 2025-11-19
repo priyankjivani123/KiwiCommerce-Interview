@@ -1,0 +1,338 @@
+<?php
+/**
+ * @var $block Priyank\Testimonials\Block\Testimonials
+ */
+$testimonials = $block->getTestimonials();
+?>
+
+<?php if ($testimonials->getSize()): ?>
+<div class="testimonials-section">
+    <div class="container">
+        <div class="testimonials-header">
+            <h2><?= __('What Our Customers Say') ?></h2>
+            <p><?= __('Don\'t just take our word for it') ?></p>
+        </div>
+        
+        <div class="testimonials-slider" id="testimonialsSlider">
+            <div class="testimonials-wrapper">
+                <?php foreach ($testimonials as $testimonial): ?>
+                <div class="testimonial-item">
+                    <div class="testimonial-card">
+                        <div class="quote-icon">
+                            <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                                <path d="M10 20C10 14.477 14.477 10 20 10C25.523 10 30 14.477 30 20C30 25.523 25.523 30 20 30C14.477 30 10 25.523 10 20Z" fill="#4A90E2" opacity="0.1"/>
+                                <path d="M14 18.5C14 16.567 15.567 15 17.5 15C19.433 15 21 16.567 21 18.5C21 20.433 19.433 22 17.5 22H17V24H15V22C13.895 22 13 21.105 13 20V18.5H14ZM25 18.5C25 16.567 26.567 15 28.5 15C30.433 15 32 16.567 32 18.5C32 20.433 30.433 22 28.5 22H28V24H26V22C24.895 22 24 21.105 24 20V18.5H25Z" fill="#4A90E2"/>
+                            </svg>
+                        </div>
+                        
+                        <div class="testimonial-message">
+                            <p><?= $escaper->escapeHtml($testimonial->getMessage()) ?></p>
+                        </div>
+                        
+                        <div class="testimonial-footer">
+                            <div class="profile-info">
+                                <div class="profile-pic">
+                                    <img src="<?= $escaper->escapeUrl($block->getProfilePicUrl($testimonial->getProfilePic())) ?>" 
+                                         alt="<?= $escaper->escapeHtmlAttr($testimonial->getName()) ?>">
+                                </div>
+                                <div class="profile-details">
+                                    <h4 class="customer-name"><?= $escaper->escapeHtml($testimonial->getName()) ?></h4>
+                                    <?php if ($testimonial->getCompanyName()): ?>
+                                        <p class="company-name"><?= $escaper->escapeHtml($testimonial->getCompanyName()) ?></p>
+                                    <?php endif; ?>
+                                    <?php if ($testimonial->getPost()): ?>
+                                        <p class="post"><?= $escaper->escapeHtml($testimonial->getPost()) ?></p>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <?php endforeach; ?>
+            </div>
+        </div>
+        
+        <div class="testimonials-navigation">
+            <button class="testimonial-prev" aria-label="Previous">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M15 18l-6-6 6-6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+            <div class="testimonials-dots"></div>
+            <button class="testimonial-next" aria-label="Next">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M9 18l6-6-6-6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+</div>
+
+<style>
+.testimonials-section {
+    padding: 60px 0;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.testimonials-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse"><path d="M 100 0 L 0 0 0 100" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)"/></svg>');
+    opacity: 0.5;
+}
+
+.testimonials-section .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.testimonials-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.testimonials-header h2 {
+    font-size: 36px;
+    font-weight: 700;
+    color: #2c3e50;
+    margin: 0 0 10px;
+}
+
+.testimonials-header p {
+    font-size: 18px;
+    color: #7f8c8d;
+    margin: 0;
+}
+
+.testimonials-slider {
+    overflow: hidden;
+    position: relative;
+}
+
+.testimonials-wrapper {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.testimonial-item {
+    min-width: 100%;
+    padding: 0 10px;
+    box-sizing: border-box;
+}
+
+.testimonial-card {
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.quote-icon {
+    margin-bottom: 20px;
+}
+
+.testimonial-message {
+    margin-bottom: 30px;
+}
+
+.testimonial-message p {
+    font-size: 18px;
+    line-height: 1.8;
+    color: #34495e;
+    margin: 0;
+    font-style: italic;
+}
+
+.testimonial-footer {
+    border-top: 1px solid #ecf0f1;
+    padding-top: 20px;
+}
+
+.profile-info {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.profile-pic {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid #4A90E2;
+    flex-shrink: 0;
+}
+
+.profile-pic img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profile-details {
+    flex: 1;
+}
+
+.customer-name {
+    font-size: 20px;
+    font-weight: 600;
+    color: #2c3e50;
+    margin: 0 0 5px;
+}
+
+.company-name {
+    font-size: 16px;
+    color: #4A90E2;
+    margin: 0 0 3px;
+    font-weight: 500;
+}
+
+.post {
+    font-size: 14px;
+    color: #95a5a6;
+    margin: 0;
+}
+
+.testimonials-navigation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-top: 40px;
+}
+
+.testimonial-prev,
+.testimonial-next {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: white;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.testimonial-prev:hover,
+.testimonial-next:hover {
+    background: #4A90E2;
+    color: white;
+    transform: scale(1.1);
+}
+
+.testimonial-prev svg,
+.testimonial-next svg {
+    stroke: currentColor;
+}
+
+.testimonials-dots {
+    display: flex;
+    gap: 10px;
+}
+
+.testimonials-dots .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(74, 144, 226, 0.3);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.testimonials-dots .dot.active {
+    background: #4A90E2;
+    width: 30px;
+    border-radius: 6px;
+}
+
+@media (max-width: 768px) {
+    .testimonials-section {
+        padding: 40px 0;
+    }
+    
+    .testimonials-header h2 {
+        font-size: 28px;
+    }
+    
+    .testimonial-card {
+        padding: 30px 20px;
+    }
+    
+    .testimonial-message p {
+        font-size: 16px;
+    }
+    
+    .profile-info {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+</style>
+
+<script>
+require(['jquery'], function($) {
+    $(document).ready(function() {
+        const slider = $('#testimonialsSlider');
+        const wrapper = slider.find('.testimonials-wrapper');
+        const items = wrapper.find('.testimonial-item');
+        const dotsContainer = $('.testimonials-dots');
+        const prevBtn = $('.testimonial-prev');
+        const nextBtn = $('.testimonial-next');
+        
+        let currentIndex = 0;
+        const totalItems = items.length;
+        
+        // Create dots
+        for (let i = 0; i < totalItems; i++) {
+            dotsContainer.append(`<div class="dot ${i === 0 ? 'active' : ''}" data-index="${i}"></div>`);
+        }
+        
+        const dots = dotsContainer.find('.dot');
+        
+        function updateSlider() {
+            const offset = -currentIndex * 100;
+            wrapper.css('transform', `translateX(${offset}%)`);
+            
+            dots.removeClass('active');
+            dots.eq(currentIndex).addClass('active');
+        }
+        
+        function nextSlide() {
+            currentIndex = (currentIndex + 1) % totalItems;
+            updateSlider();
+        }
+        
+        function prevSlide() {
+            currentIndex = (currentIndex - 1 + totalItems) % totalItems;
+            updateSlider();
+        }
+        
+        nextBtn.on('click', nextSlide);
+        prevBtn.on('click', prevSlide);
+        
+        dots.on('click', function() {
+            currentIndex = $(this).data('index');
+            updateSlider();
+        });
+        
+        // Auto-play
+        setInterval(nextSlide, 5000);
+    });
+});
+</script>
+<?php endif; ?>

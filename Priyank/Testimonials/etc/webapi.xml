@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <!-- GET list -->
+    <route url="/V1/testimonials" method="GET">
+        <service class="Priyank\Testimonials\Api\TestimonialsRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <!-- GET by ID -->
+    <route url="/V1/testimonials/:testimonialsId" method="GET">
+        <service class="Priyank\Testimonials\Api\TestimonialsRepositoryInterface" method="get"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+
+    <!-- POST create/update -->
+    <route url="/V1/testimonials" method="POST">
+        <service class="Priyank\Testimonials\Api\TestimonialsRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <!-- DELETE by ID -->
+    <route url="/V1/testimonials/:testimonialsId" method="DELETE">
+        <service class="Priyank\Testimonials\Api\TestimonialsRepositoryInterface" method="deleteById"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+</routes>

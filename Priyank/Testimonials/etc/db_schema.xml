@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+	<table name="priyank_testimonials_testimonials" resource="default" engine="innodb" comment="priyank_testimonials_testimonials Table">
+		<column xsi:type="int" name="id" padding="10" unsigned="true" nullable="false" identity="true" comment="Entity Id"/>
+		<constraint xsi:type="primary" referenceId="PRIMARY">
+			<column name="id"/>
+		</constraint>
+		<column name="company_name" nullable="true" xsi:type="varchar" comment="company_name" length="255"/>
+		<column name="name" nullable="true" xsi:type="varchar" comment="name" length="255"/>
+		<column name="message" nullable="true" xsi:type="text" comment="message"/>
+		<column name="post" nullable="true" xsi:type="varchar" comment="post" length="255"/>
+		<column name="profile_pic" nullable="true" xsi:type="varchar" comment="profile_pic" length="255"/>
+		<column name="status" nullable="true" xsi:type="boolean" comment="status"/>
+		<column name="created_at" xsi:type="timestamp" nullable="false"
+	        default="CURRENT_TIMESTAMP" comment="Created At"/>
+		<column name="updated_at" xsi:type="timestamp" nullable="false"
+        default="CURRENT_TIMESTAMP" on_update="true" comment="Updated At"/>
+
+	</table>
+</schema>
